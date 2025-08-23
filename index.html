@@ -1,0 +1,55 @@
+<!DOCTYPE Html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" value="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="stylesheet.css">
+        <title>Password Generator by GG94</title>
+    </head>
+
+    <body>
+
+        <main>
+
+            <div>
+                <p id="password-input" readonly></p>
+            </div>
+
+            </div>
+                <p> Password Strenght </p>
+                <span></span>
+            </div>
+
+            <div>
+
+                <label for="password-number"> Length of Password <input type="number" id="password-number" value="8" min="0"></label>
+
+            </div>
+
+            <div>
+
+                <label for="upper-case"> Include Upper Case <input type="checkbox" id="upper-case" checked></label>
+                <label for="lower-case"> Include Lower Case <input type="checkbox" id="lower-case"checked></label>
+                <label for="number"> Include Numbers <input type="checkbox" id="number" checked></label>
+                <label for="symbol"> Include Symbols <input type="checkbox" id="symbol" checked></label>
+
+            </div>
+
+            <div>
+
+                <label for="avoider"> Exclude Duplicate Characters <input type="checkbox" id="avoider"></label>
+                <label for="numberonly"> Exclude Ambiguous Characters (l, 1, I, 0, O) <input type="checkbox" id="numberonly"></label>
+                <label for="hexa"> Only Hexadecimal points (0-9, A-F) <input type="checkbox" id="hexa"></label>
+
+            <div>
+
+                <button id="password-button">Generate</button>
+                <button id="copy-btn">Copy</button>
+
+        </main>
+
+        <script src="script.js"></script>
+    </body>
+
+</html>
