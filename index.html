@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" value="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="stylesheet.css">
         <title>Password Generator by GG94</title>
     </head>
@@ -12,40 +12,49 @@
 
         <main>
 
-            <div>
-                <p id="password-input" readonly></p>
+            <h1>Password Generator</h1>
+
+            <div class="passgen">
+                <p id="password-input" class="passinput" readonly></p>
             </div>
 
+            <div class="buttons">
+                <button id="password-button">Generate</button>
+                <button id="copy-btn">Copy</button>
             </div>
-                <p> Password Strenght </p>
+
+            <div class="Passstr">
+                <p> Password Strength </p>
                 <span></span>
             </div>
 
-            <div>
+            <div class="passnum">
 
-                <label for="password-number"> Length of Password <input type="number" id="password-number" value="8" min="0"></label>
-
-            </div>
-
-            <div>
-
-                <label for="upper-case"> Include Upper Case <input type="checkbox" id="upper-case" checked></label>
-                <label for="lower-case"> Include Lower Case <input type="checkbox" id="lower-case"checked></label>
-                <label for="number"> Include Numbers <input type="checkbox" id="number" checked></label>
-                <label for="symbol"> Include Symbols <input type="checkbox" id="symbol" checked></label>
+                <label for="password-number"> Length of Password </label>
+                <button class="increase">+</button>
+                <input type="number" id="password-number" value="8" min="0">
+                <button class="decrease">-</button>
+                
 
             </div>
 
-            <div>
+            <div class="character-settings">
 
-                <label for="avoider"> Exclude Duplicate Characters <input type="checkbox" id="avoider"></label>
-                <label for="numberonly"> Exclude Ambiguous Characters (l, 1, I, 0, O) <input type="checkbox" id="numberonly"></label>
-                <label for="hexa"> Only Hexadecimal points (0-9, A-F) <input type="checkbox" id="hexa"></label>
+                <label for="upper-case"> Include Upper Case </label> <input type="checkbox" id="upper-case" checked>
+                <label for="lower-case"> Include Lower Case </label> <input type="checkbox" id="lower-case"checked>
+                <label for="number"> Include Numbers </label> <input type="checkbox" id="number" checked>
+                <label for="symbol"> Include Symbols </label> <input type="checkbox" id="symbol" checked>
 
-            <div>
+            </div>
 
-                <button id="password-button">Generate</button>
-                <button id="copy-btn">Copy</button>
+            <div class="extra-settings">
+
+                <label for="avoider"> Exclude Duplicate Characters </label> <input type="checkbox" id="avoider">
+                <label for="numberonly"> Exclude Ambiguous Characters (l, 1, I, 0, O) </label> <input type="checkbox" id="numberonly">
+                <label for="hexa"> Only Hexadecimal points (0-9, A-F) </label> <input type="checkbox" id="hexa">
+                <label for="symbol-chosen"> Only include following symbols </label> <input type="checkbox" id="symbol-chosen">
+
+            </div>
 
         </main>
 
