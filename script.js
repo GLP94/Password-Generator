@@ -1,5 +1,5 @@
 const passwordLength = document.getElementById("password-number");
-const passwordGeneratorButton = document.getElementById("password-button");
+const passwordGen = document.getElementById("gen-btn");
 const passwordInput = document.getElementById("password-input");
 const copyButton = document.getElementById("copy-btn");
 const upperCaseCheck = document.getElementById("upper-case");
@@ -7,13 +7,12 @@ const lowerCaseCheck = document.getElementById("lower-case");
 const numberCheck = document.getElementById("number");
 const symbolCheck = document.getElementById("symbol");
 const avoidSame = document.getElementById("avoider");
+const avoidAmb = document.getElementById("ambiguous")
+const increase = document.getElementById("increase");
+const decrease = document.getElementById("decrease");
+const strengthRating = document.getElementById("passrating");
 
-const upp = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const low = "abcdefghijklmnopqrstuvwxyz";
-const num = "0123456789";
-const sym = "!@#$%^&*()_+-=[]{}|;:,.<>?";
-
-passwordGeneratorButton.addEventListener("click", passwordFunction);
+passwordGen.addEventListener("click", passwordFunction);
 passwordLength.addEventListener("input", passwordFunction);
 
 upperCaseCheck.addEventListener("click", passwordFunction);
@@ -22,16 +21,49 @@ numberCheck.addEventListener("click", passwordFunction);
 symbolCheck.addEventListener("click", passwordFunction);
 avoidSame.addEventListener("click", passwordFunction);
 
+const copyModal = document.getElementById("copied-modal")
+
 copyButton.addEventListener("click", () => {
   navigator.clipboard.writeText(passwordInput.innerText);
-  copyButton.innerText = "Copied!";
+
+  copyModal.style.display = "flex";
+
+  if (copyModal.style.display === "flex") {
+    copyModal.style.display = "none";
+    
+  }
+
   setTimeout(function () {
-    copyButton.innerText = "Copy";
+    copyModal.style.display = "none";
   }, 2000);
+  
+});
+
+increase.addEventListener("click", () => {
+  if (passwordLength.value >= 32) {
+    return;
+  }
+  passwordLength.value++;
+  passwordFunction();
+  passwordStrength();
+});
+
+decrease.addEventListener("click", () => {
+  if (passwordLength.value <= 0) {
+    return;
+  }
+  passwordLength.value--;
+  passwordFunction();
+  passwordStrength();
 });
 
 function passwordGenerator(length, upperCase, lowerCase, numbers, symbols) {
   let charSet = "";
+
+  const upp = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const low = "abcdefghijklmnopqrstuvwxyz";
+  const num = "0123456789";
+  const sym = "!@#$%^&*()_+-=[]{}|;:,.<>?";
 
   if (upperCase) {
     charSet += upp;
@@ -68,6 +100,8 @@ function passwordGenerator(length, upperCase, lowerCase, numbers, symbols) {
     }
   }
 
+  
+
   return password;
 }
 
@@ -79,12 +113,12 @@ function passwordFunction() {
   let symbols = symbolCheck.checked;
 
   if (!upperCase && !lowerCase && !numbers && !symbols) {
-    passwordInput.innerText = "Please select at least one character set.";
+    passwordInput.innerText = "Please select at least one \n character set.";
     return;
   }
 
   if (length <= 0) {
-    passwordInput.innerText = "Please select a password's length.";
+    passwordInput.innerText = "Please select a password's \n length.";
     return;
   }
 
@@ -99,44 +133,48 @@ function passwordFunction() {
   passwordInput.innerText = password;
 }
 
-function passwordStrenght() {
+function passwordStrength() {
   let score = 0;
 
-  if (upperCaseCheck.checked) {
+  if (+passwordLength.value <= 8) {
+    score += 1;
+  } else if (+passwordLength.value <= 18) {
+    score += 2;
+  } else if (+passwordLength.value <= 24) {
+    score += 3;
+  } else  {
+    score += 4;
+  }
+
+  if (/[A-Z]/.test(passwordInput.innerText)) {
     score += 1;
   }
 
-  if (lowerCaseCheck.checked) {
+  if (/[a-z]/.test(passwordInput.innerText)) {
     score += 1;
   }
 
-  if (numberCheck.checked) {
+  if (/[0-9]/.test(passwordInput.innerText)) {
     score += 1;
   }
 
-  if (symbolCheck.checked) {
+  if (/[!@#$%^&*()_\+\-=\[\]{}|;:,.<>?]/.test(passwordInput.innerText)) {
     score += 1;
   }
 
-  if (passwordLength.value < 8) {
-    score += 1;
-  } else if (passwordLength.value < 16) {
-    score += 1;
-  } else if (passwordLength.value < 32) {
-    score += 1;
-  } else if (passwordLength.value >= 32) {
-    score += 1;
-  }
-
-  if (score <= 2) {
-    return "Weak";
-  } else if (score <= 4) {
-    return "Mild";
+  if (score <= 4) {
+    strengthRating.innerText = "BAD";
   } else if (score <= 6) {
-    return "Medium";
-  } else if (score <= 8) {
-    return "Strong!";
+    strengthRating.innerText = "GOOD!";
+  } else if (score === 8) {
+    strengthRating.innerText = "AMAZING!";
   }
 }
 
+upperCaseCheck.addEventListener("click", passwordStrength);
+lowerCaseCheck.addEventListener("click", passwordStrength);
+numberCheck.addEventListener("click", passwordStrength);
+symbolCheck.addEventListener("click", passwordStrength);
+
+passwordStrength();
 passwordFunction();

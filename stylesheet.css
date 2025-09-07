@@ -9,22 +9,30 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 main{
+    width: 100%;
+    background: rgb(140, 196, 214);
     display: flex;
     align-items: center;
     flex-direction: column;
-    border: 1px solid black;
-    border-radius: 5%;
     padding: 1rem;
-    width: 25rem;
-    margin: 2rem;
 }
 
-.passinput{
+.passgen{
+    background: rgb(85, 156, 180);
     font-size: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.4);
     margin: 1rem;
+    width: 22rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    word-break: break-all;
 }
 
 .character-settings, .extra-settings{
@@ -45,27 +53,116 @@ input[type="number"]{
     height: 40px;
     text-align: center;
     margin: 1rem 0;
-    border: 1px solid black;
-    outline: none;
-
+    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.4);
     &::-webkit-inner-spin-button {
     -webkit-appearance: none;
     }
+}
+
+.passnum{
+    display: grid;
+    grid-template-columns: 12.5rem auto;
+    gap: 1rem;
+    align-items: center;
+    margin: 1rem;
+}
+
+.Passstr{
+    text-align: center;
+    margin: 1rem;
+}
+
+.Passstr p:first-of-type {
+    font-size: 1.5rem;
+}
+
+#passrating {
+    margin: 1rem;
 }
 
 .increase, .decrease{
     width: 40px;
     height: 40px;
     background: white;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    transition: all ease-in-out 0.2s;
+    &:active{
+        background: rgb(223, 218, 218);
+    }
 }
 
 .increase{
     margin-right: -5px;
-    border-radius: 10% 0 0 10%;
 }
 
 .decrease{
     margin-left: -5px;
-    border-radius: 0 10% 10% 0;
+}
+
+.linebreak{
+    width: 15rem;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.get-btn, .copy-btn{
+    width: 5rem;
+    height: 2rem;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    transition: all ease-in-out 0.1s;
+    &:active{
+        background: rgb(223, 218, 218);
+    }
+}
+
+.active{
+    background: rgb(223, 218, 218);
+    transition: all 0.2s ease-in-out;
+}
+
+.get-btn{
+    margin-right: 5em;
+}
+
+.copied-modal{
+    position: fixed;
+    top: 20px;
+    width: 100%;
+    height: 40px;
+    background: rgb(5, 179, 5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 1.5rem;
+    opacity: 0;
+    z-index: 1;
+    animation-name: appearance;
+    animation-duration: 2s;
+}
+
+@keyframes appearance{
+    0%{
+        opacity: 0;
+        top: -20px;
+    }
+
+    50% {
+        opacity: 1;
+        top: 0;
+    }
+
+    100%{
+        opacity: 0;
+        top: -20px;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .copied-modal{
+        width: 100%;
+    }
 }

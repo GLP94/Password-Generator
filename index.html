@@ -14,29 +14,32 @@
 
             <h1>Password Generator</h1>
 
-            <div class="passgen">
+            <div class="passgen" id="passcont">
                 <p id="password-input" class="passinput" readonly></p>
             </div>
 
             <div class="buttons">
-                <button id="password-button">Generate</button>
-                <button id="copy-btn">Copy</button>
+                <button id="gen-btn" class="get-btn">Generate</button>
+                <button id="copy-btn" class="copy-btn">Copy</button>
             </div>
 
             <div class="Passstr">
                 <p> Password Strength </p>
-                <span></span>
+                <p id="passrating"></p>
             </div>
 
             <div class="passnum">
 
                 <label for="password-number"> Length of Password </label>
-                <button class="increase">+</button>
-                <input type="number" id="password-number" value="8" min="0">
-                <button class="decrease">-</button>
+                <div>
+                    <button id="increase" class="increase">+</button>
+                    <input type="number" id="password-number" value="8" min="0">
+                    <button id="decrease" class="decrease">-</button>
+                </div>
                 
-
             </div>
+
+            <div class="linebreak"></div>
 
             <div class="character-settings">
 
@@ -47,16 +50,24 @@
 
             </div>
 
+            <div class="linebreak"></div>
+
             <div class="extra-settings">
 
                 <label for="avoider"> Exclude Duplicate Characters </label> <input type="checkbox" id="avoider">
-                <label for="numberonly"> Exclude Ambiguous Characters (l, 1, I, 0, O) </label> <input type="checkbox" id="numberonly">
+                <label for="ambiguous"> Exclude Ambiguous Characters (l, 1, I, 0, O) </label> <input type="checkbox" id="ambiguous">
                 <label for="hexa"> Only Hexadecimal points (0-9, A-F) </label> <input type="checkbox" id="hexa">
                 <label for="symbol-chosen"> Only include following symbols </label> <input type="checkbox" id="symbol-chosen">
 
             </div>
 
+            
+
         </main>
+
+        <div id="copied-modal" class="copied-modal">
+            <p>Password has been copied!</p>
+        </div>
 
         <script src="script.js"></script>
     </body>
