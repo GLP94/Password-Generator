@@ -62,10 +62,9 @@ input[type="number"]{
 
 .passnum{
     display: grid;
-    grid-template-columns: 12.5rem auto;
+    grid-template-columns: 12.5rem 9rem;
     gap: 1rem;
     align-items: center;
-    margin: 1rem;
 }
 
 .Passstr{
