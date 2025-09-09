@@ -7,7 +7,7 @@ const lowerCaseCheck = document.getElementById("lower-case");
 const numberCheck = document.getElementById("number");
 const symbolCheck = document.getElementById("symbol");
 const avoidSame = document.getElementById("avoider");
-const avoidAmb = document.getElementById("ambiguous")
+const avoidAmb = document.getElementById("ambiguous");
 const increase = document.getElementById("increase");
 const decrease = document.getElementById("decrease");
 const strengthRating = document.getElementById("passrating");
@@ -21,22 +21,22 @@ numberCheck.addEventListener("click", passwordFunction);
 symbolCheck.addEventListener("click", passwordFunction);
 avoidSame.addEventListener("click", passwordFunction);
 
-const copyModal = document.getElementById("copied-modal")
+const copyModal = document.getElementById("copied-modal");
+
+let copyModalAppear;
 
 copyButton.addEventListener("click", () => {
   navigator.clipboard.writeText(passwordInput.innerText);
 
   copyModal.style.display = "flex";
 
-  if (copyModal.style.display === "flex") {
-    copyModal.style.display = "none";
-    
+  if (copyModalAppear) {
+    return;
   }
-
-  setTimeout(function () {
+  copyModalAppear = setTimeout(() => {
     copyModal.style.display = "none";
+    copyModalAppear = null;
   }, 2000);
-  
 });
 
 increase.addEventListener("click", () => {
@@ -56,6 +56,56 @@ decrease.addEventListener("click", () => {
   passwordFunction();
   passwordStrength();
 });
+
+let increaseInterval;
+
+function startIncrease() {
+  if (increaseInterval) {
+    return;
+  }
+  increaseInterval = setInterval(() => {
+    if (passwordLength.value < 32) {
+      passwordLength.value++;
+      passwordFunction();
+      passwordStrength();
+    }
+  }, 100);
+}
+
+function stopIncrease() {
+  clearInterval(increaseInterval);
+  increaseInterval = null;
+}
+
+increase.addEventListener("touchstart", startIncrease);
+increase.addEventListener("touchend", stopIncrease);
+increase.addEventListener("mousedown", startIncrease);
+increase.addEventListener("mouseup", stopIncrease);
+
+let decreaseInterval
+
+function startDecrease() {
+  if (decreaseInterval) {
+    return;
+  }
+  decreaseInterval = setInterval(() => {
+    if (passwordLength.value > 0) {
+      passwordLength.value--;
+      passwordFunction();
+      passwordStrength();
+    }
+  }, 100);
+}
+
+function stopDecrease() {
+  clearInterval(decreaseInterval);
+  decreaseInterval = null;
+}
+
+decrease.addEventListener("touchstart", startDecrease);
+decrease.addEventListener("touchend", stopDecrease);
+decrease.addEventListener("mousedown", startDecrease);
+decrease.addEventListener("mouseup", stopDecrease);
 
 function passwordGenerator(length, upperCase, lowerCase, numbers, symbols) {
   let charSet = "";
@@ -100,8 +150,6 @@ function passwordGenerator(length, upperCase, lowerCase, numbers, symbols) {
     }
   }
 
-  
-
   return password;
 }
 
@@ -142,7 +190,7 @@ function passwordStrength() {
     score += 2;
   } else if (+passwordLength.value <= 24) {
     score += 3;
-  } else  {
+  } else {
     score += 4;
   }
 

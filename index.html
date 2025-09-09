@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="stylesheet.css">
         <title>Password Generator by GG94</title>
     </head>
@@ -33,7 +33,7 @@
                 <label for="password-number"> Length of Password </label>
                 <div>
                     <button id="increase" class="increase">+</button>
-                    <input type="number" id="password-number" value="8" min="0">
+                    <input type="number" id="password-number" value="8" min="0" max="64" readonly>
                     <button id="decrease" class="decrease">-</button>
                 </div>
                 
