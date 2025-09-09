@@ -1,177 +1,191 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-body{
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
-main{
-    width: 100%;
-    background: rgb(140, 196, 214);
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 1rem;
+/* Main container */
+
+main {
+  width: 100%;
+  background: rgb(140, 196, 214);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
 }
 
-.passgen{
-    background: rgb(85, 156, 180);
-    font-size: 1.5rem;
-    max-width: 20rem;
-    height: 5rem;
-    margin: 1rem;
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    word-break: break-all;
+/* Password Section */
+
+.passgen {
+  background: rgb(85, 156, 180);
+  font-size: 1.5rem;
+  max-width: 20rem;
+  height: 5rem;
+  margin: 1rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  word-break: break-all;
 }
 
-.character-settings, .extra-settings{
-    display: grid;
-    grid-template-columns: 18rem auto;
-    gap: 1rem;
-    align-items: center;
-    margin: 1rem;
+.get-btn,
+.copy-btn {
+  width: 5rem;
+  height: 2rem;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  &:active {
+    background: rgb(223, 218, 218);
+  }
 }
 
-input[type="checkbox"]{
-    width: 20px;
-    height: 20px;
+.get-btn {
+  /* To distance both buttons */
+  margin-right: 5em;
 }
 
-input[type="number"]{
-    width: 60px;
-    height: 40px;
-    text-align: center;
-    font-size: 1.5rem;
-    border: none;
-    outline: none;
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    &::-webkit-inner-spin-button {
+/* Password Number Length Section */
+
+.passnum {
+  display: grid;
+  grid-template-columns: 10.6rem 138px;
+  gap: 1rem;
+  margin: 1rem 0;
+  align-items: center;
+}
+
+input[type="number"] {
+  width: 60px;
+  height: 40px;
+  text-align: center;
+  font-size: 1.5rem;
+  border: none;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  &::-webkit-inner-spin-button { /* Makes the default increase and decrease buttons desappear */
     -webkit-appearance: none;
-    }
+  }
 }
 
-.passnum{
-    display: grid;
-    grid-template-columns: 11rem 138px;
-    gap: 1rem;
-    margin: 1rem 0;
-    align-items: center;
+.increase,
+.decrease {
+  width: 40px;
+  height: 40px;
+  background: white;
+  font-size: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  transition: all ease-in-out 0.2s;
+  &:active {
+    background: rgb(223, 218, 218);
+  }
 }
 
-.Passstr{
-    text-align: center;
-    margin: 1rem;
+.increase {
+  /* Attach it to the number input */
+  margin-right: -5px;
+}
+
+.decrease {
+  /* Attach it to the number input */
+  margin-left: -5px;
+}
+
+/* Password Strength Section */
+
+.Passstr {
+  text-align: center;
+  margin: 1rem;
 }
 
 .Passstr p:first-of-type {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 #passrating {
-    margin: 1rem;
+  margin: 1rem;
 }
 
-.increase, .decrease{
-    width: 40px;
-    height: 40px;
-    background: white;
-    font-size: 1.5rem;
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    transition: all ease-in-out 0.2s;
-    &:active{
-        background: rgb(223, 218, 218);
-    }
+/* Password Settings Section */
+
+.character-settings,
+.extra-settings {
+  display: grid;
+  grid-template-columns: 18rem auto;
+  gap: 1rem;
+  align-items: center;
+  margin: 1rem;
 }
 
-.increase{
-    margin-right: -5px;
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
 }
 
-.decrease{
-    margin-left: -5px;
+/* Lines, Modal */
+
+.linebreak {
+  width: 15rem;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.4);
 }
 
-.linebreak{
-    width: 15rem;
-    height: 1px;
-    background: rgba(0, 0, 0, 0.4);
+.copied-modal {
+  position: fixed;
+  top: 20px;
+  width: 100%;
+  height: 40px;
+  background: rgb(5, 179, 5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 1.5rem;
+  opacity: 0;
+  z-index: 1;
+  animation-name: appearance;
+  animation-duration: 2s;
 }
 
-.get-btn, .copy-btn{
-    width: 5rem;
-    height: 2rem;
-    background: white;
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    &:active{
-        background: rgb(223, 218, 218);
-    }
-}
-
-.active{
-    background: rgb(223, 218, 218);
-    transition: all 0.2s ease-in-out;
-}
-
-.get-btn{
-    margin-right: 5em;
-}
-
-.copied-modal{
-    position: fixed;
-    top: 20px;
-    width: 100%;
-    height: 40px;
-    background: rgb(5, 179, 5);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: 600;
-    font-size: 1.5rem;
+@keyframes appearance {
+  /* Sets up the animation for the modal's appearance on the push of the copy button */
+  0% {
     opacity: 0;
-    z-index: 1;
-    animation-name: appearance;
-    animation-duration: 2s;
-}
+    top: -20px;
+  }
 
-@keyframes appearance{
-    0%{
-        opacity: 0;
-        top: -20px;
-    }
+  50% {
+    opacity: 1;
+    top: 0;
+  }
 
-    50% {
-        opacity: 1;
-        top: 0;
-    }
-
-    100%{
-        opacity: 0;
-        top: -20px;
-    }
+  100% {
+    opacity: 0;
+    top: -20px;
+  }
 }
 
 @media only screen and (max-width: 420px) {
-    .copied-modal{
-        width: 100%;
-    }
+  .copied-modal {
+    width: 100%;
+  }
 
-    * {
-        font-size: 14px;
-    }
+  * {
+    font-size: 14px;
+  }
 
-    .passnum{
+  .passnum {
     grid-template-columns: 10rem 138px;
-}
+  }
 }
