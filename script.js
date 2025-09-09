@@ -8,6 +8,7 @@ const numberCheck = document.getElementById("number");
 const symbolCheck = document.getElementById("symbol");
 const avoidSame = document.getElementById("avoider");
 const avoidAmb = document.getElementById("ambiguous");
+const onlyHex = document.getElementById("hexa");
 const increase = document.getElementById("increase");
 const decrease = document.getElementById("decrease");
 const strengthRating = document.getElementById("passrating");
@@ -131,9 +132,18 @@ function passwordGenerator(length, upperCase, lowerCase, numbers, symbols) {
     charSet += sym;
   }
 
+  if (avoidAmb.checked) {
+    charSet = charSet.replace(/[I1l0O]/g, "");
+  }
+
+  if (onlyHex.checked) {
+    charSet = charSet.replace(/[GHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*\(\)\_\+\-\=\[\]\{\}\|\;\:\,\.\<\>\?]/g, "");
+  }
+
   let password = "";
 
   let charArr = charSet.split("");
+
 
   for (let i = 0; i < length; i++) {
     if (avoidSame.checked) {
