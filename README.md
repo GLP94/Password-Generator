@@ -13,8 +13,8 @@ Characters:\
 
 Settings:\
 [x] Exclusion of duplicate characters\
-[ ] Exclusion of ambiguous characters\
-[ ] Only include Hexadecimal characters\
+[X] Exclusion of ambiguous characters\
+[X] Only include Hexadecimal characters\
 [ ] Exclusion/Inclusion of specific characters
 
 Extra:\
