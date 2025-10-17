@@ -19,7 +19,7 @@ Settings:\
 
 Extra:\
 [ ] Password strength rating\
-[ ] Save the passwords generated
-[ ] List of favorites
-[ ] Optional ID with generated password?
+[ ] Save the passwords generated\
+[ ] List of favorites\
+[ ] Optional ID with generated password?\
 [ ] Save up your favorites as text file?
