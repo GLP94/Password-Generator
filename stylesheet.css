@@ -1,3 +1,9 @@
+:root {
+  --main1: rgb(216, 169, 108);
+  --body1: rgb(173, 124, 59);
+  --screen: rgb(161, 108, 38);
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -6,114 +12,43 @@
 
 body {
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+  background-color: var(--body1);
+  font-family:'exo', sans-serif;
 }
 
 /* Main container */
 
 main {
   width: 100%;
-  background: rgb(140, 196, 214);
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding: 1rem;
-}
-
-/* Password Section */
-
-.passgen {
-  background: rgb(85, 156, 180);
-  font-size: 1.5rem;
-  max-width: 20rem;
-  height: 5rem;
-  margin: 1rem;
-  padding: 1rem;
+  background: var(--main1);
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  word-break: break-all;
-}
-
-.get-btn,
-.copy-btn {
-  width: 5rem;
-  height: 2rem;
-  background: white;
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  &:active {
-    background: rgb(223, 218, 218);
+  flex-direction: column;
+  padding: 1rem;
+  h1{
+    text-align: center;
+    margin: 1rem;
+    max-width: 20rem;
   }
-}
-
-.get-btn {
-  /* To distance both buttons */
-  margin-right: 5em;
 }
 
 /* Password Number Length Section */
 
 .passnum {
   display: grid;
-  grid-template-columns: 10.6rem 138px;
   gap: 1rem;
-  margin: 1rem 0;
-  align-items: center;
-}
-
-input[type="number"] {
-  width: 60px;
-  height: 40px;
+  grid-template-columns: 9.688rem auto;
   text-align: center;
-  font-size: 1.5rem;
-  border: none;
-  outline: none;
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  &::-webkit-inner-spin-button { /* Makes the default increase and decrease buttons desappear */
-    -webkit-appearance: none;
-  }
+  margin: 1rem
 }
 
-.increase,
-.decrease {
-  width: 40px;
-  height: 40px;
-  background: white;
-  font-size: 1.5rem;
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  transition: all ease-in-out 0.2s;
-  &:active {
-    background: rgb(223, 218, 218);
-  }
+.passnum p{
+  width: 10rem;
 }
 
-.increase {
-  /* Attach it to the number input */
-  margin-right: -5px;
-}
-
-.decrease {
-  /* Attach it to the number input */
-  margin-left: -5px;
-}
-
-/* Password Strength Section */
-
-.Passstr {
-  text-align: center;
-  margin: 1rem;
-}
-
-.Passstr p:first-of-type {
-  font-size: 1.5rem;
-}
-
-#passrating {
-  margin: 1rem;
+#numPass{
+  font-weight: 600;
 }
 
 /* Password Settings Section */
@@ -121,7 +56,7 @@ input[type="number"] {
 .character-settings,
 .extra-settings {
   display: grid;
-  grid-template-columns: 18rem auto;
+  grid-template-columns: 15rem auto;
   gap: 1rem;
   align-items: center;
   margin: 1rem;
@@ -142,8 +77,9 @@ input[type="checkbox"] {
 
 .copied-modal {
   position: fixed;
-  top: 20px;
-  width: 100%;
+  bottom: 0;
+  right: 0;
+  width: 20rem;
   height: 40px;
   background: rgb(5, 179, 5);
   display: none;
@@ -158,34 +94,114 @@ input[type="checkbox"] {
   animation-duration: 2s;
 }
 
+/* Sliders */
+
+.toggle{
+  position:relative;
+
+  input{
+    position: absolute;
+    appearance: none;
+    inset: 0;
+    border-radius: 2rem;
+    overflow: hidden;
+    
+    &:checked + .slider{
+      background-color: var(--screen);
+    }
+
+    &:checked + .slider:before{
+      transform: translateX(20px);
+    }
+  }
+
+  .slider{
+    position: relative;
+    display: block;
+    cursor: pointer;
+    background-color: var(--body1);
+    width: 44px;
+    height: 24px;
+    
+
+    &:before{
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      height: 20px;
+      width: 20px;
+      background-color: white;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+}
+
+/* Password Section */
+
+.get-btn{
+  padding: 1rem 1.5rem;
+  border-radius: 5rem;
+  background: var(--screen);
+  border: 0;
+}
+
+.saved-passwords{
+  text-align: center;
+}
+
+.passGenerated{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  height: 10rem;
+}
+
+.pass{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 20rem;
+  padding: 0.5rem;
+  background: grey;
+  .passB{
+    display: flex;
+    gap: 0.5rem;
+  }
+}
+
+.copy-btn, 
+.delete-btn{
+  border: none;
+  background: none;
+  cursor: pointer;
+  svg{
+    fill: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+
+
 @keyframes appearance {
   /* Sets up the animation for the modal's appearance on the push of the copy button */
   0% {
     opacity: 0;
-    top: -20px;
+    bottom: -20px;
   }
 
   50% {
     opacity: 1;
-    top: 0;
+    bottom: 0;
   }
 
   100% {
     opacity: 0;
-    top: -20px;
-  }
-}
-
-@media only screen and (max-width: 420px) {
-  .copied-modal {
-    width: 100%;
-  }
-
-  * {
-    font-size: 14px;
-  }
-
-  .passnum {
-    grid-template-columns: 10rem 138px;
+    bottom: -20px;
   }
 }
