@@ -8,15 +8,17 @@ const avoidSame = document.getElementById("avoider");
 const avoidAmb = document.getElementById("ambiguous");
 const onlyHex = document.getElementById("hexa");
 const passGenerated = document.getElementById("passGenerated");
+const modal = document.getElementById("modalContainer");
+const numberGenerate = document.getElementById("numGen");
+const selectedSymbols = document.getElementById("symbolsel");
+const numGen = document.getElementById("numGen");
+const numGenerated = document.getElementById("number-generated");
+let numPass = document.getElementById("numPass");
 
 passwordGen.addEventListener("click", passwordFunction);
 
-let numPass = document.getElementById("numPass");
-
-numPass.textContent = passwordLength.value;
-
-passwordLength.addEventListener("input", () => {
-  numPass.textContent = passwordLength.value;
+symbolCheck.addEventListener("change", () => {
+  symbolCheck.checked ? selectedSymbols.disabled = false : selectedSymbols.disabled = true;
 });
 
 function passwordGenerator(length, upperCase, lowerCase, numbers, symbols) {
@@ -25,22 +27,19 @@ function passwordGenerator(length, upperCase, lowerCase, numbers, symbols) {
   const upp = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const low = "abcdefghijklmnopqrstuvwxyz";
   const num = "0123456789";
-  const sym = "!@#$%^&*()_+-=[]{}|;:,.<>?";
 
-  if (upperCase) {
-    charSet += upp;
-  }
+  upperCase ? charSet += upp : "";
 
-  if (lowerCase) {
-    charSet += low;
-  }
+  lowerCase ? charSet += low : "";
 
-  if (numbers) {
-    charSet += num;
-  }
+  numbers ? charSet += num : "";
 
   if (symbols) {
-    charSet += sym;
+    if (selectedSymbols.value !== "") {
+      charSet += selectedSymbols.value;
+    } else {
+      charSet += "!@#$%^&*_+-=|;:,.<>?";
+    }
   }
 
   if (avoidAmb.checked) {
@@ -76,6 +75,8 @@ function passwordGenerator(length, upperCase, lowerCase, numbers, symbols) {
   return password;
 }
 
+let errord;
+
 function passwordFunction() {
   let length = passwordLength.value;
   let upperCase = upperCaseCheck.checked;
@@ -84,12 +85,34 @@ function passwordFunction() {
   let symbols = symbolCheck.checked;
 
   if (!upperCase && !lowerCase && !numbers && !symbols) {
-    passwordInput.innerText = "Please select at least one \n character set.";
+
+    modal.style.display = "block";
+    modal.innerText = "Please select at least one character setting";
+
+    if (!errord) {
+      errord = setTimeout(() => {
+        modal.style.display = "none";
+        modal.innerText = ""
+        errord = null;
+      }, 4000);
+    }
+
     return;
   }
 
   if (length <= 0) {
-    passwordInput.innerText = "Please select a password's \n length.";
+    
+    modal.style.display = "block";
+    modal.innerText = "Please choose a password's length";
+
+    if (!errord) {
+      errord = setTimeout(() => {
+        modal.style.display = "none";
+        modal.innerText = ""
+        errord = null;
+      }, 4000);
+    }
+
     return;
   }
 
@@ -105,6 +128,8 @@ function passwordFunction() {
   passContainer(password);
   
 }
+
+
 
 function passContainer(password) {
   let cont = document.createElement("div");
@@ -150,13 +175,14 @@ passGenerated.addEventListener("click", (e) => {
     
     navigator.clipboard.writeText(p.innerText);
 
-    copyModal.style.display = "flex";
+    modal.style.display = "block";
+    modal.innerText = "Password copied in the clipboard!"
 
     if (!copyModalAppear) {
       copyModalAppear = setTimeout(() => {
-        copyModal.style.display = "none";
+        modal.style.display = "none";
         copyModalAppear = null;
-      }, 2000);
+      }, 5000);
     }
   }
   
@@ -210,3 +236,15 @@ function loadPasswordStorage() {
 }
 
 loadPasswordStorage();
+
+numPass.textContent = passwordLength.value;
+
+passwordLength.addEventListener("input", () => {
+  numPass.textContent = passwordLength.value;
+});
+
+numGen.textContent = numGenerated.value;
+
+numGenerated.addEventListener("input", () => {
+  numGen.textContent = numGenerated.value;
+});

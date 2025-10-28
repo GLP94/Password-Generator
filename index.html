@@ -18,81 +18,94 @@
 
         <main>
 
-            <h1 class="heading">Random Password Generator</h1>
+            <h1 class="heading">Password Generator</h1>
 
-            <div class="passnum">
+            <div class="passSettings">
 
-                <p> Length of Password: <span id="numPass">0</span> </p>
-                <input type="range" id="password-number" value="8" min="0" max="20">
+                <div class="character-settings">
+
+                    <p>Upper Case</p> 
+                    <label class="toggle">
+                        <input type="checkbox" id="upper-case" class="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+
+                    <p>Lower Case</p>
+                    <label class="toggle">
+                        <input type="checkbox" id="lower-case" class="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+
+                    <p>Numbers</p>
+                    <label class="toggle">
+                        <input type="checkbox" id="number" class="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+
+                    <p>Symbols</p>
+
+                    <label class="toggle">
+                        <input type="checkbox" id="symbol" class="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+
+                </div>
+
+                <div class="extra-settings">
+
+                    <p>Exclude Duplicates</p> 
+                    <label class="toggle">
+                        <input type="checkbox" id="avoider" class="checkbox">
+                        <span class="slider"></span>
+                    </label>
+
+                    <p>Exclude Similiar</p> 
+                    <label class="toggle">
+                        <input type="checkbox" id="ambiguous" class="checkbox">
+                        <span class="slider"></span>
+                    </label>
+
+                    <p>Only Hexadecimal</p> 
+                    <label class="toggle">
+                        <input type="checkbox" id="hexa" class="checkbox">
+                        <span class="slider"></span>
+                    </label>
+
+                    <p>Parenthesis/Brackets</p> 
+                    <label class="toggle">
+                        <input type="checkbox" id="pAndB" class="checkbox">
+                        <span class="slider"></span>
+                    </label>
+
+                </div>
 
             </div>
 
-            <div class="linebreak"></div>
-
-            <div class="character-settings">
-
-                <p> Include Upper Case </p> 
-                
-                <label class="toggle">
-                    <input type="checkbox" id="upper-case" class="checkbox" checked>
-                    <span class="slider"></span>
-                </label>
-
-                <p> Include Lower Case </p>
-
-                <label class="toggle">
-                    <input type="checkbox" id="lower-case" class="checkbox" checked>
-                    <span class="slider"></span>
-                </label>
-
-                <p> Include Numbers </p>
-
-                <label class="toggle">
-                    <input type="checkbox" id="number" class="checkbox" checked>
-                    <span class="slider"></span>
-                </label>
-
-                <p> Include Symbols </p>
-
-                <label class="toggle">
-                    <input type="checkbox" id="symbol" class="checkbox" checked>
-                    <span class="slider"></span>
-                </label>
-
+            <div class="symballowed">
+                <p>Allow Symbols</p>
+                <input type="text" id="symbolsel" class="symbolsel" placeholder="!@#$%...">
             </div>
 
-            <div class="linebreak"></div>
+            <div class="generatorPass">
 
-            <div class="extra-settings">
+                <div class="passnum">
 
-                <p> Exclude Duplicate Characters </p> 
+                    <p>Length of Password</p>
+                    <button class="increment">+</button>
+                    <input type="number" id="password-number" value="8" min="0" max="16">
+                    <button class="decrement">-</button>
+
+                </div>
+
+                <div class="numgen">
+
+                    <p>Amount of Passwords</p>
+                    <button class="increment">+</button>
+                    <input type="number" id="number-generated" value="1" min="1" max="5">
+                    <button class="decrement">-</button>
+
+                </div>
                 
-                <label class="toggle">
-                    <input type="checkbox" id="avoider" class="checkbox">
-                    <span class="slider"></span>
-                </label>
-
-                <p> Exclude Ambiguous Characters </p> 
-                
-                <label class="toggle">
-                    <input type="checkbox" id="ambiguous" class="checkbox">
-                    <span class="slider"></span>
-                </label>
-
-                <p> Only Hexadecimal points </p> 
-                
-                <label class="toggle">
-                    <input type="checkbox" id="hexa" class="checkbox">
-                    <span class="slider"></span>
-                </label>
-
-                <p> Only include following symbols </p> 
-                
-                <label class="toggle">
-                    <input type="checkbox" id="symbol-chosen" class="checkbox">
-                    <span class="slider"></span>
-                </label>
-
             </div>
 
             <button id="gen-btn" class="get-btn">Generate</button>
@@ -100,13 +113,10 @@
         </main>
 
         <div class="saved-passwords">
-            <h2>Saved Passwords</h2>
             <div id="passGenerated" class="passGenerated"></div>
         </div>
 
-        <div id="copied-modal" class="copied-modal">
-            <p>Password has been copied!</p>
-        </div>
+        <div id="modalContainer" class="modal"></div>
 
         <script src="script.js"></script>
     </body>

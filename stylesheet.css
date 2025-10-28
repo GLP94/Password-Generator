@@ -1,9 +1,3 @@
-:root {
-  --main1: rgb(216, 169, 108);
-  --body1: rgb(173, 124, 59);
-  --screen: rgb(161, 108, 38);
-}
-
 * {
   padding: 0;
   margin: 0;
@@ -12,43 +6,75 @@
 
 body {
   height: 100vh;
-  background-color: var(--body1);
+  background-color: grey;
   font-family:'exo', sans-serif;
 }
 
 /* Main container */
 
+.toggle{
+  display: flex;
+  justify-content: center;
+}
+
 main {
   width: 100%;
-  background: var(--main1);
+  background: rgb(241, 239, 239);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 1rem;
+
   h1{
     text-align: center;
-    margin: 1rem;
-    max-width: 20rem;
+    background: grey;
+    color: white;
+    width: 100%;
+    font-size: 2rem;
   }
 }
 
-/* Password Number Length Section */
+/* Password Lenght & Password Amount*/
 
-.passnum {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 9.688rem auto;
+.generatorPass{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.passnum, .numgen{
   text-align: center;
-  margin: 1rem
+  margin: 0 1rem;
+
+  p {
+    margin: 0 0 0.5rem 0;
+  }
+
+  input{
+    display: inline-block;
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid grey;
+    background: none;
+    width: 48px;
+    height: 24px;
+    font-weight: 600;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
-.passnum p{
-  width: 10rem;
-}
-
-#numPass{
-  font-weight: 600;
+.increment, .decrement{
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  border: none;
+  background: grey;
+  color: white;
 }
 
 /* Password Settings Section */
@@ -56,7 +82,7 @@ main {
 .character-settings,
 .extra-settings {
   display: grid;
-  grid-template-columns: 15rem auto;
+  grid-template-columns: 10rem auto;
   gap: 1rem;
   align-items: center;
   margin: 1rem;
@@ -67,21 +93,28 @@ input[type="checkbox"] {
   height: 20px;
 }
 
-/* Lines, Modal */
-
-.linebreak {
-  width: 15rem;
-  height: 1px;
-  background: rgba(0, 0, 0, 0.4);
+.symbolsel {
+  width: 94px;
+  height: 24px;
 }
 
-.copied-modal {
+.symballowed{
+  display: flex;
+  margin: 1rem 0;
+  align-items: center;
+
+  p {
+    margin: 0 1rem 0 0;
+  }
+}
+
+/* Lines, Modal */
+
+.modal {
   position: fixed;
   bottom: 0;
-  right: 0;
-  width: 20rem;
+  width: 35rem;
   height: 40px;
-  background: rgb(5, 179, 5);
   display: none;
   align-items: center;
   justify-content: center;
@@ -91,7 +124,7 @@ input[type="checkbox"] {
   opacity: 0;
   z-index: 1;
   animation-name: appearance;
-  animation-duration: 2s;
+  animation-duration: 4s;
 }
 
 /* Sliders */
@@ -107,7 +140,7 @@ input[type="checkbox"] {
     overflow: hidden;
     
     &:checked + .slider{
-      background-color: var(--screen);
+      background-color: grey;
     }
 
     &:checked + .slider:before{
@@ -119,7 +152,7 @@ input[type="checkbox"] {
     position: relative;
     display: block;
     cursor: pointer;
-    background-color: var(--body1);
+    background-color: grey;
     width: 44px;
     height: 24px;
     
@@ -140,14 +173,13 @@ input[type="checkbox"] {
 /* Password Section */
 
 .get-btn{
-  padding: 1rem 1.5rem;
-  border-radius: 5rem;
-  background: var(--screen);
+  padding: 0.5rem;
+  border-radius: 5px;
+  background: grey;
   border: 0;
-}
-
-.saved-passwords{
-  text-align: center;
+  margin: 1rem;
+  color: white;
+  font-weight: 600;
 }
 
 .passGenerated{
@@ -155,9 +187,6 @@ input[type="checkbox"] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
-  height: 10rem;
 }
 
 .pass{
@@ -183,13 +212,13 @@ input[type="checkbox"] {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    &:hover{
+      fill: yellow;
+    }
   }
 }
 
-
-
 @keyframes appearance {
-  /* Sets up the animation for the modal's appearance on the push of the copy button */
   0% {
     opacity: 0;
     bottom: -20px;
@@ -197,11 +226,24 @@ input[type="checkbox"] {
 
   50% {
     opacity: 1;
-    bottom: 0;
+    bottom: 10px;
   }
 
   100% {
     opacity: 0;
     bottom: -20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .passSettings {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .character-settings,
+  .extra-settings {
+    grid-template-columns: 9rem 3rem;
   }
 }
