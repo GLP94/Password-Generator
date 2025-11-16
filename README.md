@@ -2,24 +2,17 @@
 
 App that is capable of generating a random password with many options to modify it. As well as the capability of saving up those passwords.
 
-## Current functionality:
+# Highlights
 
-Characters:\
-[x] Upper Case\
-[x] Lower Case\
-[x] Numbers\
-[x] Symbols\
-[ ] Non-english characters
+* Different settings to customize your password with ease;
+* Can make a large number of passwords on a list-like container, with the ability to copy each one or to delete each one.
 
-Settings:\
-[x] Exclusion of duplicate characters\
-[X] Exclusion of ambiguous characters\
-[X] Only include Hexadecimal characters\
-[ ] Make specific special characters appear
+# Tools used
 
-Extra:\
-[ ] Password strength rating\
-[ ] Save the passwords generated\
-[ ] List of favorites\
-[ ] Optional ID with generated password?\
-[ ] Save up your favorites as text file?
+* HTML
+* CSS
+* JavaScript
+
+# Feedback
+
+Any sort of feedback, whatever it may be, is always welcome!
