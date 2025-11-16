@@ -1,25 +1,31 @@
 const passwordLength = document.getElementById("password-number");
+const numGenerated = document.getElementById("number-generated");
 const passwordGen = document.getElementById("gen-btn");
+
 const upperCaseCheck = document.getElementById("upper-case");
 const lowerCaseCheck = document.getElementById("lower-case");
 const numberCheck = document.getElementById("number");
 const symbolCheck = document.getElementById("symbol");
+
 const avoidSame = document.getElementById("avoider");
 const avoidAmb = document.getElementById("ambiguous");
 const onlyHex = document.getElementById("hexa");
+const selectedSymbols = document.getElementById("symbolsel");
+
+const increase = document.getElementById("increment");
+const decrease = document.getElementById("decrement");
+
 const passGenerated = document.getElementById("passGenerated");
 const modal = document.getElementById("modalContainer");
-const numberGenerate = document.getElementById("numGen");
-const selectedSymbols = document.getElementById("symbolsel");
-const numGen = document.getElementById("numGen");
-const numGenerated = document.getElementById("number-generated");
-let numPass = document.getElementById("numPass");
-
-passwordGen.addEventListener("click", passwordFunction);
+const close = document.querySelector(".closeBtn");
 
 symbolCheck.addEventListener("change", () => {
-  symbolCheck.checked ? selectedSymbols.disabled = false : selectedSymbols.disabled = true;
+  symbolCheck.checked
+    ? (selectedSymbols.disabled = false)
+    : (selectedSymbols.disabled = true);
 });
+
+passwordGen.addEventListener("click", passwordFunction);
 
 function passwordGenerator(length, upperCase, lowerCase, numbers, symbols) {
   let charSet = "";
@@ -28,11 +34,11 @@ function passwordGenerator(length, upperCase, lowerCase, numbers, symbols) {
   const low = "abcdefghijklmnopqrstuvwxyz";
   const num = "0123456789";
 
-  upperCase ? charSet += upp : "";
+  upperCase ? (charSet += upp) : "";
 
-  lowerCase ? charSet += low : "";
+  lowerCase ? (charSet += low) : "";
 
-  numbers ? charSet += num : "";
+  numbers ? (charSet += num) : "";
 
   if (symbols) {
     if (selectedSymbols.value !== "") {
@@ -47,10 +53,7 @@ function passwordGenerator(length, upperCase, lowerCase, numbers, symbols) {
   }
 
   if (onlyHex.checked) {
-    charSet = charSet.replace(
-      /[GHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*\(\)\_\+\-\=\[\]\{\}\|\;\:\,\.\<\>\?]/g,
-      ""
-    );
+    charSet = ""
   }
 
   let password = "";
@@ -78,21 +81,22 @@ function passwordGenerator(length, upperCase, lowerCase, numbers, symbols) {
 let errord;
 
 function passwordFunction() {
-  let length = passwordLength.value;
+  let length = parseInt(passwordLength.value, 10);
   let upperCase = upperCaseCheck.checked;
   let lowerCase = lowerCaseCheck.checked;
   let numbers = numberCheck.checked;
   let symbols = symbolCheck.checked;
 
   if (!upperCase && !lowerCase && !numbers && !symbols) {
-
     modal.style.display = "block";
+    modal.classList.add("error");
     modal.innerText = "Please select at least one character setting";
 
     if (!errord) {
       errord = setTimeout(() => {
         modal.style.display = "none";
-        modal.innerText = ""
+        modal.innerText = "";
+        modal.classList.remove("error");
         errord = null;
       }, 4000);
     }
@@ -101,14 +105,15 @@ function passwordFunction() {
   }
 
   if (length <= 0) {
-    
     modal.style.display = "block";
     modal.innerText = "Please choose a password's length";
+    modal.classList.add("error");
 
     if (!errord) {
       errord = setTimeout(() => {
         modal.style.display = "none";
-        modal.innerText = ""
+        modal.innerText = "";
+        modal.classList.remove("error");
         errord = null;
       }, 4000);
     }
@@ -124,12 +129,8 @@ function passwordFunction() {
     symbols
   );
 
-  passwordStorage(password);
   passContainer(password);
-  
 }
-
-
 
 function passContainer(password) {
   let cont = document.createElement("div");
@@ -156,8 +157,6 @@ function passContainer(password) {
   passGenerated.appendChild(cont);
 }
 
-const copyModal = document.getElementById("copied-modal");
-
 let copyModalAppear;
 
 passGenerated.addEventListener("click", (e) => {
@@ -169,82 +168,46 @@ passGenerated.addEventListener("click", (e) => {
     }
   }
 
-  const cop = e.target.closest(".copy-btn")
+  const cop = e.target.closest(".copy-btn");
   if (cop) {
     const p = cop.closest(".pass");
-    
+
     navigator.clipboard.writeText(p.innerText);
 
     modal.style.display = "block";
-    modal.innerText = "Password copied in the clipboard!"
+    modal.classList.add("copy");
+    modal.innerText = "Password copied in the clipboard!";
 
     if (!copyModalAppear) {
       copyModalAppear = setTimeout(() => {
         modal.style.display = "none";
+        modal.classList.remove("copy");
+        modal.innerText = "";
         copyModalAppear = null;
       }, 5000);
     }
   }
-  
 });
 
-const conts = passGenerated.querySelectorAll(".pass");
-for (let i = 0; i < conts.length; i++) {
-  if (i % 2 === 0) {
-    conts[i].style.backgroundColor = "red";
-  }
-}
+let numberLength = 8;
+passwordLength.value = numberLength;
 
-function passwordStrength(str) {
-  let score = 0;
+passwordLength.addEventListener("input", ()=> {
+  numberLength = parseInt(passwordLength.value, 10);
+})
 
-  if (pass.innerText.length <= 8) {
-    score += 1;
-  } else if (pass.innerText.length <= 18) {
-    score += 2;
-  } else if (pass.innerText.length <= 24) {
-    score += 3;
-  } else {
-    score += 4;
-  }
-
-  let charset = [];
-
-  for (let char of pass.innerText) {
-    if (!charset.includes(char)) {
-      charset.push(char);
-      score += 1;
-    } else {
-      continue;
-    }
-  }
-}
-
-function passwordStorage(p) {
-  const passwordSaved = localStorage.getItem("password");
-  const passwordList = passwordSaved ? JSON.parse(passwordSaved) : [];
-
-  passwordList.push(p);
-
-  localStorage.setItem("password", JSON.stringify(passwordList));
-}
-
-function loadPasswordStorage() {
-  const passwordList = JSON.parse(passwordSaved);
-
-  passwordList.forEach((p) => {});
-}
-
-loadPasswordStorage();
-
-numPass.textContent = passwordLength.value;
-
-passwordLength.addEventListener("input", () => {
-  numPass.textContent = passwordLength.value;
+increase.addEventListener("click", ()=> {
+  numberLength++;
+  passwordLength.value = numberLength;
 });
 
-numGen.textContent = numGenerated.value;
-
-numGenerated.addEventListener("input", () => {
-  numGen.textContent = numGenerated.value;
+decrease.addEventListener("click", ()=> {
+  numberLength--;
+  passwordLength.value = numberLength;
 });
+
+let container = document.querySelector(".passSettings");
+
+close.addEventListener("click", ()=> {
+  container.classList.toggle("closed");
+})

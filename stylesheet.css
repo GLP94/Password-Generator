@@ -12,11 +12,6 @@ body {
 
 /* Main container */
 
-.toggle{
-  display: flex;
-  justify-content: center;
-}
-
 main {
   width: 100%;
   background: rgb(241, 239, 239);
@@ -24,60 +19,46 @@ main {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
+
+  .passSettings{
+
+    z-index: 0;
+  }
+}
+
+.closed{
+  margin-top: -50rem;
+}
+
+.hidden{
+  display: none;
+}
+
+header{
+  text-align: center;
+  background: black;
+  color: white;
+  width: 100%;
+  z-index: 1;
 
   h1{
-    text-align: center;
-    background: grey;
-    color: white;
-    width: 100%;
-    font-size: 2rem;
+    margin: 0 0.5rem;
+    font-size: 1.5rem;
+    z-index: 1;
   }
-}
-
-/* Password Lenght & Password Amount*/
-
-.generatorPass{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.passnum, .numgen{
-  text-align: center;
-  margin: 0 1rem;
-
-  p {
-    margin: 0 0 0.5rem 0;
-  }
-
-  input{
-    display: inline-block;
-    text-align: center;
-    border: none;
-    border-bottom: 2px solid grey;
-    background: none;
-    width: 48px;
-    height: 24px;
-    font-weight: 600;
-  }
-
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button{
-    -webkit-appearance: none;
-    margin: 0;
-  }
-}
-
-.increment, .decrement{
-  width: 24px;
-  height: 24px;
-  border-radius: 5px;
-  border: none;
-  background: grey;
-  color: white;
 }
 
 /* Password Settings Section */
+
+.basicSet, .exSet{
+  margin-top: 1rem;
+
+  h2{
+    border-bottom: 1px solid black;
+  }
+}
 
 .character-settings,
 .extra-settings {
@@ -85,7 +66,7 @@ main {
   grid-template-columns: 10rem auto;
   gap: 1rem;
   align-items: center;
-  margin: 1rem;
+  margin: 0.5rem;
 }
 
 input[type="checkbox"] {
@@ -96,35 +77,17 @@ input[type="checkbox"] {
 .symbolsel {
   width: 94px;
   height: 24px;
+  padding: 0.5rem;
 }
 
 .symballowed{
   display: flex;
-  margin: 1rem 0;
+  margin: 0.5rem;
   align-items: center;
 
   p {
     margin: 0 1rem 0 0;
   }
-}
-
-/* Lines, Modal */
-
-.modal {
-  position: fixed;
-  bottom: 0;
-  width: 35rem;
-  height: 40px;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 600;
-  font-size: 1.5rem;
-  opacity: 0;
-  z-index: 1;
-  animation-name: appearance;
-  animation-duration: 4s;
 }
 
 /* Sliders */
@@ -170,10 +133,57 @@ input[type="checkbox"] {
   }
 }
 
-/* Password Section */
+/* Password Lenght & Password Amount*/
+
+.generatorPass{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.passnum, .numgen{
+  text-align: center;
+  margin: 0 1rem;
+
+  p {
+    margin: 0 0 0.5rem 0;
+  }
+
+  input{
+    display: inline-block;
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid grey;
+    background: none;
+    width: 48px;
+    height: 24px;
+    font-weight: 600;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.increment, .decrement{
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  border: none;
+  background: grey;
+  color: white;
+  cursor: pointer;
+  &:active{
+    background-color:white;
+  }
+}
 
 .get-btn{
-  padding: 0.5rem;
+  padding: 1rem 1.5rem;
   border-radius: 5px;
   background: grey;
   border: 0;
@@ -181,6 +191,8 @@ input[type="checkbox"] {
   color: white;
   font-weight: 600;
 }
+
+/* Password Section */
 
 .passGenerated{
   display: flex;
@@ -196,6 +208,7 @@ input[type="checkbox"] {
   width: 20rem;
   padding: 0.5rem;
   background: grey;
+  border: 1px solid black;
   .passB{
     display: flex;
     gap: 0.5rem;
@@ -218,24 +231,56 @@ input[type="checkbox"] {
   }
 }
 
+/* Modal */
+
+.modal {
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  padding: 0.5rem;
+  display: none;
+  color: white;
+  font-weight: 600;
+  opacity: 0;
+  z-index: 1;
+  animation-name: appearance;
+  animation-duration: 4s;
+}
+
+.error{
+  background-color: red;
+}
+
+.copy{
+  background-color: green;
+}
+
+/* Close Btn */
+
+.closeBtn{
+  position: absolute;
+  right: 10px;
+  top: 4px;
+  width: 24px;
+  height: 24px;
+}
+
 @keyframes appearance {
   0% {
     opacity: 0;
-    bottom: -20px;
   }
 
   50% {
     opacity: 1;
-    bottom: 10px;
   }
 
   100% {
     opacity: 0;
-    bottom: -20px;
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 40rem) {
   .passSettings {
     display: flex;
     justify-content: center;
@@ -245,5 +290,19 @@ input[type="checkbox"] {
   .character-settings,
   .extra-settings {
     grid-template-columns: 9rem 3rem;
+  }
+
+  .generatorPass{
+    flex-direction: row;
+  }
+
+  .modal{
+    max-width: 30rem;
+    bottom: 5px;
+    left: 5px;
+  }
+
+  .closeBtn{
+    display: none;
   }
 }
