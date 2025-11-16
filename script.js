@@ -12,8 +12,8 @@ const avoidAmb = document.getElementById("ambiguous");
 const onlyHex = document.getElementById("hexa");
 const selectedSymbols = document.getElementById("symbolsel");
 
-const increase = document.getElementById("increment");
-const decrease = document.getElementById("decrement");
+const increase = document.querySelectorAll(".increment");
+const decrease = document.querySelectorAll(".decrement");
 
 const passGenerated = document.getElementById("passGenerated");
 const modal = document.getElementById("modalContainer");
@@ -25,7 +25,11 @@ symbolCheck.addEventListener("change", () => {
     : (selectedSymbols.disabled = true);
 });
 
-passwordGen.addEventListener("click", passwordFunction);
+passwordGen.addEventListener("click", () => {
+  for (let i = 1; i <= numGenerated.value; i++) {
+    passwordFunction()
+  }
+});
 
 function passwordGenerator(length, upperCase, lowerCase, numbers, symbols) {
   let charSet = "";
@@ -196,14 +200,36 @@ passwordLength.addEventListener("input", ()=> {
   numberLength = parseInt(passwordLength.value, 10);
 })
 
-increase.addEventListener("click", ()=> {
-  numberLength++;
-  passwordLength.value = numberLength;
+increase.forEach((e) => {
+  e.addEventListener("click", ()=> {
+    let input = e.parentElement.querySelector("input");
+    let max = parseInt(input.max, 10);
+    let value = parseInt(input.value, 10);
+
+    let newValue = value + 1;
+
+    if (newValue > max) {
+      return;
+    };
+    
+    input.value = newValue;
+  });
 });
 
-decrease.addEventListener("click", ()=> {
-  numberLength--;
-  passwordLength.value = numberLength;
+decrease.forEach((e) => {
+  e.addEventListener("click", ()=> {
+    let input = e.parentElement.querySelector("input");
+    let min = parseInt(input.min, 10);
+    let value = parseInt(input.value, 10);
+
+    let newValue = value - 1;
+
+    if (newValue < min) {
+      return;
+    };
+    
+    input.value = newValue;
+  });
 });
 
 let container = document.querySelector(".passSettings");

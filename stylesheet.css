@@ -103,7 +103,7 @@ input[type="checkbox"] {
     overflow: hidden;
     
     &:checked + .slider{
-      background-color: grey;
+      background-color: green;
     }
 
     &:checked + .slider:before{
@@ -178,7 +178,7 @@ input[type="checkbox"] {
   color: white;
   cursor: pointer;
   &:active{
-    background-color:white;
+    background-color:green;
   }
 }
 
@@ -190,6 +190,9 @@ input[type="checkbox"] {
   margin: 1rem;
   color: white;
   font-weight: 600;
+  &:active{
+    background-color: green;
+  }
 }
 
 /* Password Section */
