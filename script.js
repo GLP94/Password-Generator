@@ -16,7 +16,6 @@ const increase = document.querySelectorAll(".increment");
 const decrease = document.querySelectorAll(".decrement");
 
 const passGenerated = document.getElementById("passGenerated");
-const modal = document.getElementById("modalContainer");
 const close = document.querySelector(".closeBtn");
 
 symbolCheck.addEventListener("change", () => {
@@ -91,40 +90,6 @@ function passwordFunction() {
   let numbers = numberCheck.checked;
   let symbols = symbolCheck.checked;
 
-  if (!upperCase && !lowerCase && !numbers && !symbols) {
-    modal.style.display = "block";
-    modal.classList.add("error");
-    modal.innerText = "Please select at least one character setting";
-
-    if (!errord) {
-      errord = setTimeout(() => {
-        modal.style.display = "none";
-        modal.innerText = "";
-        modal.classList.remove("error");
-        errord = null;
-      }, 4000);
-    }
-
-    return;
-  }
-
-  if (length <= 0) {
-    modal.style.display = "block";
-    modal.innerText = "Please choose a password's length";
-    modal.classList.add("error");
-
-    if (!errord) {
-      errord = setTimeout(() => {
-        modal.style.display = "none";
-        modal.innerText = "";
-        modal.classList.remove("error");
-        errord = null;
-      }, 4000);
-    }
-
-    return;
-  }
-
   let password = passwordGenerator(
     length,
     upperCase,
@@ -161,7 +126,6 @@ function passContainer(password) {
   passGenerated.appendChild(cont);
 }
 
-let copyModalAppear;
 
 passGenerated.addEventListener("click", (e) => {
   const del = e.target.closest(".delete-btn");
@@ -177,19 +141,6 @@ passGenerated.addEventListener("click", (e) => {
     const p = cop.closest(".pass");
 
     navigator.clipboard.writeText(p.innerText);
-
-    modal.style.display = "block";
-    modal.classList.add("copy");
-    modal.innerText = "Password copied in the clipboard!";
-
-    if (!copyModalAppear) {
-      copyModalAppear = setTimeout(() => {
-        modal.style.display = "none";
-        modal.classList.remove("copy");
-        modal.innerText = "";
-        copyModalAppear = null;
-      }, 5000);
-    }
   }
 });
 
@@ -232,7 +183,7 @@ decrease.forEach((e) => {
   });
 });
 
-let container = document.querySelector(".passSettings");
+let container = document.getElementById("generatorSection");
 
 close.addEventListener("click", ()=> {
   container.classList.toggle("closed");

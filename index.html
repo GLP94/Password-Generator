@@ -16,125 +16,112 @@
 
     <body>
 
-        <header>
-            <h1 class="heading">Password Generator</h1>
-        </header>
-
-        <button type="button" class="closeBtn">X</button>
-
         <main>
+            <header>
+                <h1 class="heading">Password Generator</h1>
+            </header>
 
-            <div class="passSettings">
+            <section>
+                <button type="button" class="closeBtn">X</button>
 
-                <div class="basicSet">
+                <div id="generatorSection">
+                    <button id="gen-btn" class="get-btn">Generate</button>
 
-                    <h2>Basic Settings</h2>
+                    <div class="generatorPass">
+                        <div class="passnum">
+                            <p>Length</p>
+                            <div>
+                                <button type="button" class="increment">+</button>
+                                <input type="number" id="password-number" value="8" min="0" max="16">
+                                <button type="button" class="decrement">-</button>
+                            </div>
+                        </div>
 
-                    <div class="character-settings">
-
-                        <p>Upper Case</p> 
-                        <label class="toggle">
-                            <input type="checkbox" id="upper-case" class="checkbox" checked>
-                            <span class="slider"></span>
-                        </label>
-
-                        <p>Lower Case</p>
-                        <label class="toggle">
-                            <input type="checkbox" id="lower-case" class="checkbox" checked>
-                            <span class="slider"></span>
-                        </label>
-
-                        <p>Numbers</p>
-                        <label class="toggle">
-                            <input type="checkbox" id="number" class="checkbox" checked>
-                            <span class="slider"></span>
-                        </label>
-
-                        <p>Symbols</p>
-
-                        <label class="toggle">
-                            <input type="checkbox" id="symbol" class="checkbox" checked>
-                            <span class="slider"></span>
-                        </label>
-
+                        <div class="numgen">
+                            <p>Quantity</p>
+                            <div>
+                                <button type="button" class="increment">+</button>
+                                <input type="number" id="number-generated" value="1" min="1" max="5">
+                                <button type="button" class="decrement">-</button>
+                            </div>
+                        </div>
                     </div>
 
-                </div>
+                    <div class="passSettings">
+                        <div class="basicSet">
+                            <h2>Basic Settings</h2>
 
-                <div class="exSet">
+                            <div class="character-settings">
 
-                    <h2>Extra Settings</h2>
+                                <p>Upper Case</p> 
+                                <label class="toggle">
+                                    <input type="checkbox" id="upper-case" class="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
 
-                    <div class="extra-settings">
+                                <p>Lower Case</p>
+                                <label class="toggle">
+                                    <input type="checkbox" id="lower-case" class="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
 
-                        <p>Exclude Duplicates</p> 
-                        <label class="toggle">
-                            <input type="checkbox" id="avoider" class="checkbox">
-                            <span class="slider"></span>
-                        </label>
+                                <p>Numbers</p>
+                                <label class="toggle">
+                                    <input type="checkbox" id="number" class="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
 
-                        <p>Exclude Similiar</p> 
-                        <label class="toggle">
-                            <input type="checkbox" id="ambiguous" class="checkbox">
-                            <span class="slider"></span>
-                        </label>
+                                <p>Symbols</p>
+                                <label class="toggle">
+                                    <input type="checkbox" id="symbol" class="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
 
-                        <p>Only Hexadecimal</p> 
-                        <label class="toggle">
-                            <input type="checkbox" id="hexa" class="checkbox">
-                            <span class="slider"></span>
-                        </label>
+                        <div class="exSet">
 
-                        <p>Parenthesis/Brackets</p> 
-                        <label class="toggle">
-                            <input type="checkbox" id="pAndB" class="checkbox">
-                            <span class="slider"></span>
-                        </label>
+                            <h2>Extra Settings</h2>
+                            <div class="extra-settings">
+                                <p>Exclude Duplicates</p> 
+                                <label class="toggle">
+                                    <input type="checkbox" id="avoider" class="checkbox">
+                                    <span class="slider"></span>
+                                </label>
 
+                                <p>Exclude Similiar</p> 
+                                <label class="toggle">
+                                    <input type="checkbox" id="ambiguous" class="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+
+                                <p>Only Hexadecimal</p> 
+                                <label class="toggle">
+                                    <input type="checkbox" id="hexa" class="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+
+                                <p>Parenthesis/Brackets</p> 
+                                <label class="toggle">
+                                    <input type="checkbox" id="pAndB" class="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+
+                                <p>Allow Symbols</p>
+                                <div class="symballowed">
+                                    <input type="text" id="symbolsel" class="symbolsel" placeholder="!@#$%...">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
 
-            </div>
-
-            <div class="symballowed">
-                <p>Allow Symbols</p>
-                <input type="text" id="symbolsel" class="symbolsel" placeholder="!@#$%...">
-            </div>
-
-            <div class="generatorPass">
-
-                <div class="passnum">
-
-                    <p>Length</p>
-                    <div>
-                        <button type="button" class="increment">+</button>
-                        <input type="number" id="password-number" value="8" min="0" max="16">
-                        <button type="button" class="decrement">-</button>
-                    </div>
-
+                <div class="saved-passwords">
+                    <div id="passGenerated" class="passGenerated"></div>
                 </div>
 
-                <div class="numgen">
-
-                    <p>Amount</p>
-                    <div>
-                        <button type="button" class="increment">+</button>
-                        <input type="number" id="number-generated" value="1" min="1" max="5">
-                        <button type="button" class="decrement">-</button>
-                    </div>
-
-                </div>
-                
-            </div>
-
-            <button id="gen-btn" class="get-btn">Generate</button>
-
+            </section>
         </main>
-
-        <div class="saved-passwords">
-            <div id="passGenerated" class="passGenerated"></div>
-        </div>
 
         <div id="modalContainer" class="modal"></div>
 
